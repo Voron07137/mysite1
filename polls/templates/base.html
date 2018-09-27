@@ -1,0 +1,23 @@
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% bootstrap_css %}
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+</head>
+
+<body>
+	<div class="page">
+		<div class="main-login">
+			<header class="title-post">
+				<h2>{% block content-title %}Заголовок страницы{% endblock %}</h2>
+			</header>
+			<div class="main-content">
+				{% block content %} {% endblock %}
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
