@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
-</head>
-<body>
-    {% if latest_question_list %}
-        <ul>
-        {% for question in latest_question_list %}
-            <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No polls are available.</p>
-    {% endif %}
-</body>
+{% if user.is_authenticated %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}?__v__=7d88de4e-7258-11e7-95a7-0242ac130005" />
+    </head>
+    <body>
+        {% if latest_question_list %}
+            <ul>
+            {% for question in latest_question_list %}
+                <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No polls are available.</p>
+        {% endif %}
+    </body>
+{% else %}
+    <body>
+        <p>
+            Вы не зарегистрированы. Войдите или зарегистрируетесь.
+            <a href="http://127.0.0.1:8000/accounts/login/">Click here.</a>
+        </p>
+    </body>
+{% endif %}
 </html>

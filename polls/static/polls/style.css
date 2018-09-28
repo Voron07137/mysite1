@@ -3,5 +3,7 @@ li a {
 }
 
 body {
-    background: url("images/background.gif") no-repeat right bottom;
+    background-image: url("images/background.gif");
+    background-repeat: no-repeat;
+    background-position: right 5px;
 }
