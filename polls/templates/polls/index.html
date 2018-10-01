@@ -8,15 +8,32 @@
         <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}?__v__=7d88de4e-7258-11e7-95a7-0242ac130005" />
     </head>
     <body>
-        {% if latest_question_list %}
+        {% if questions %}
             <ul>
-            {% for question in latest_question_list %}
+            {% for question in questions %}
                 <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
             {% endfor %}
             </ul>
         {% else %}
             <p>No polls are available.</p>
         {% endif %}
+        <h4>Комментарии</h4>
+        {% for comm in comments %}
+            {{comm.user}} <br>
+            {{comm.text}} <br>
+            {{comm.created}} <br><br>
+        {%endfor%}
+
+        {% if user.is_active %}
+            <form action="" method="post">
+                {%csrf_token%}
+                {{form}}
+                <input type="submit" value="Отправить">
+            </form>
+        {%else%}
+        <p> Что бы оставить комментарий,
+            войдите на сайт</p>
+        {%endif%}
     </body>
 {% else %}
     <body>

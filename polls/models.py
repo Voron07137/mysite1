@@ -4,6 +4,8 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
+
 
 
 class Question(models.Model):
@@ -29,3 +31,13 @@ class Choice(models.Model):
         return self.choice_text
 
 
+class Comment(models.Model):
+    '''Модель комметариев'''
+    class Meta():
+        db_table = 'comments'
+        verbose_name = "Комментарий"
+        verbose_name_plural = "Комментарии"
+
+    user = models.ForeignKey(User, verbose_name="Пользователь")
+    text = models.TextField("Текст комментария", max_length=500)
+    created = models.DateTimeField("Добавлен", auto_now_add=True)
