@@ -33,7 +33,7 @@ def comment(request, question_id):
     comm = form.save(commit=False)
     comm.user = request.user
     comm.save()
-    return render(request, "polls/index.html", {"question": question, "form": form, 'comment': comment})
+    return render(request, "polls/index.html", {"form": form, 'comment': comment})
 
 
 class DetailView(generic.DetailView):
