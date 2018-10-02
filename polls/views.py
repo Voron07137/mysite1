@@ -12,8 +12,8 @@ from .models import Choice, Question
 
 
 def indexView(request):
-    question = Question.objects.all
-    comment = Comment.objects.all
+    question = Question.objects.all()
+    comment = Comment.objects.all()
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -25,9 +25,6 @@ def indexView(request):
         form = CommentForm()
     return render(request, "polls/index.html", {"questions": question, "form":
         form, 'comments': comment})
-
-
-
 
 
 def comment(request, question_id):
