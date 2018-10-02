@@ -29,10 +29,15 @@ def indexView(request):
 
 def comment(request, question_id):
     comment = Comment.objects.filter(question_id=question_id)
-    form = CommentForm()
-    comm = form.save(commit=False)
-    comm.user = request.user
-    comm.save()
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comm = form.save(commit=False)
+            comm.user = request.user
+            comm.post = comment
+            comm.save()
+    else:
+        form = CommentForm()
     return render(request, "polls/index.html", {"form": form, 'comment': comment})
 
 
