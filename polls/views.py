@@ -27,20 +27,6 @@ def indexView(request):
         form, 'comments': comment})
 
 
-def comment(request, question_id):
-    comment = Comment.objects.filter(question_id=question_id)
-    if request.method == "POST":
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comm = form.save(commit=False)
-            comm.user = request.user
-            comm.post = comment
-            comm.save()
-    else:
-        form = CommentForm()
-    return render(request, "polls/index.html", {"form": form, 'comment': comment})
-
-
 class DetailView(generic.DetailView):
     model = Question
     template_name = 'polls/detail.html'
